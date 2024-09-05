@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Updated imports
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavigationBar from './components/navbar';
 import Slider from './components/Slider';
 import ProductCard from './components/productCard';
@@ -24,35 +24,34 @@ function App() {
   };
 
   return (
+
     <Router>
       <NavigationBar />
       <Routes>
-        <Route path="/" element={
-          <>
-            <Slider />
-            <Container className="mt-5">
-              <Row>
-                <Col>
-                  <LoginForm />
+        <Route path="/" exact>
+          <Slider />
+          <Container className="mt-5">
+            <Row>
+              <Col>
+                <LoginForm />
+              </Col>
+            </Row>
+            <Row className="mt-5">
+              {products.map(product => (
+                <Col key={product.id} md={4}>
+                  <ProductCard
+                    title={product.title}
+                    description={product.description}
+                    imageUrl={product.imageUrl}
+                    onAddToCart={() => handleAddToCart(product)}
+                  />
                 </Col>
-              </Row>
-              <Row className="mt-5">
-                {products.map(product => (
-                  <Col key={product.id} md={4}>
-                    <ProductCard
-                      title={product.title}
-                      description={product.description}
-                      imageUrl={product.imageUrl}
-                      onAddToCart={() => handleAddToCart(product)}
-                    />
-                  </Col>
-                ))}
-              </Row>
-            </Container>
-          </>
-        } />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/checkout" element={<Checkout />} />
+              ))}
+            </Row>
+          </Container>
+        </Route>
+        <Route path="/cart" element={Cart} />
+        <Route path="/checkout" element={Checkout} />
       </Routes>
     </Router>
   );

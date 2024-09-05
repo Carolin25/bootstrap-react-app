@@ -15,3 +15,4 @@ function ProductCard({ title, description, imageUrl, onAddToCart }) {
 }
 
 export default ProductCard;
+
